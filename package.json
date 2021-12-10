@@ -1,7 +1,7 @@
 {
-  "name": "v1",
+  "name": "TravelBlog",
   "version": "1.0.0",
-  "description": "Yelpcamp v1",
+  "description": "TravelBlog",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
