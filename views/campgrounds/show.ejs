@@ -1,0 +1,69 @@
+<%- include ("../partials/header"); -%>
+<div class="container">
+  <div class="row">
+     <div class="col-md-3">
+        <p class="lead"></p>
+        <div class="list-group">
+          <li class="list-group-item active">Info 1</li>
+          <li class="list-group-item">Info 2</li>
+          <li class="list-group-item">Info 3</li>
+        </div>
+      </div>
+     <div class="col-md-9">
+         <div class="card"   style="border-style:solid" > 
+         <img  class="card-img-top" src="<%=campground.image%>">
+         <div class="card-body">
+
+         <h4 class=" float-right">INR <%=campground.price%> /night</h4>
+         <h3 class="card-title"><%=campground.name%></h1>
+         <p class="card-text"><%=campground.description%></p>
+         <p class="card-text"><em>Submitted by <%=campground.author.username%></em></p>
+
+         <%if(currentUser&&campground.author.id.equals(currentUser._id)){%>
+         <a class="btn btn-warning" href="/campgrounds/<%=campground._id%>/edit"><i class="fas fa-edit"></i> Edit</a>
+         
+         <form id="delete-form" action="/campgrounds/<%=campground._id%>?_method=DELETE" method="POST">
+            <button class="btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
+         </form>
+         <%}%>
+
+         </div>
+         </div>
+         <div class="card bg-light" style="margin-bottom:30px; margin-top:30px;">
+         
+         <div class="container" style="padding-bottom:30px; padding-top:30px;">    
+          <a class="btn btn-success"  style="position: absolute; right: 0;"  href="/campgrounds/<%=campground._id%>/comments/new"><i class="fas fa-plus" style="margin-right:10px"></i>Add new Comment</a><br>
+         </div>
+         <% campground.comments.forEach(function(comment){%>
+         <div class="container">
+         <div class="row">
+          <div class="col-md-12">
+          <%=comment.author.username%>
+          
+          <p> <%=comment.text %></p>
+
+          <%if(currentUser&&comment.author.id.equals(currentUser._id)){%>
+          <a class="btn btn-warning" href="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>/edit"" style="margin-bottom:20px;"><i class="fas fa-edit"></i> Edit</a>
+          <form id="delete-form" action="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+            <input type="submit" class="btn btn-danger" value="Delete" style="margin-bottom:20px;">
+         </form>
+         <%}%>
+         
+         </div>
+         </div>    
+         </div>
+         <% })%>
+          
+           
+         </div> 
+      </div>  
+
+    </div>
+
+</div>
+
+
+
+
+
+	
